@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    {% if notEnoughShares %}
+        <div class="alert alert-warning" role="alert">
+            You do not own that many shares
+        </div>
+    {% endif %}
+    <form action="/sell" method="post">
+        <select name="symbol" class="custom-select">
+          <option selected>Select stock</option>
+          {% for row in owned %}
+              <option value="{{ row['symbol'] }}">{{ row["symbol"] }}</option>
+          {% endfor %}
+        </select>
+        <p></p>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="Number of shares" type="number" min="1">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}

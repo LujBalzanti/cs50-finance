@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main
+{% endblock %}
+
+{% block main %}
+    <h2> Your owned stocks</h1>
+    <div class="alert alert-success" role="alert">
+        You currently have {{ cash }} disposable cash and a total value of {{ totalValue }}!
+    </div>
+    <table class="table table-striped table-dark" style="background-color:#202a35;">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Price</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Type</th>
+                <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                  <td>{{ transaction["symbol"] }}</td>
+                  <td>{{ transaction["priceAtTransaction"] }}</td>
+                  <td>{{ transaction["shares"] }}</td>
+                  <td>{{ transaction["transactionType"] }}</td>
+                  <td>{{ transaction["timeOfTransaction"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
